@@ -1,0 +1,44 @@
+1 - Información útil para entender y depurar el código fuente del proyecto:
+
+	*La estructura de archivos esta ingles, pero el código fuente esta en español
+
+	* Se pretende seguir el patrón MVC sin ningún framework
+
+	* Esta siendo hecho en:
+		- PHP 7.0.0
+		- MySQL 5.7.9
+
+	* La estructura de directorios coincide con los namespaces para todo aquello que se encuentre en las carpetas:
+		- Config
+		- Controllers
+		- Models
+		- Views
+
+	* Archivos de configuración:
+		- Config/autoload.php: aquí se encuentran las constantes:
+			-ROOT: es la ruta en el sistema de archivos del SO del directorio del sitio web
+			-WEBROOT: es equivalente al nombre de dominio del sitio web. Puede resultar redundante, pero fue necesario usarlo en el entorno de desarrollo inicial y ya se encuentra por todo el código fuente.
+		- Models/Database/ConfigMySQL.php: esta clase guarda en sus propiedades estáticas los datos para
+			conectar con la base de datos MySQL.
+
+2 - Breve introducción al código
+
+	La idea es recibir todas las request del sitio web en index.php. Este archivo se encarga de requerir a
+	Config/autoload.php y de llamar a Enrutador.
+	Enrutador recibe como parámetro un objecto Request, el cual se construye examinando los parámetros  
+	"controlador" y "metodo" de la URL solicitada, si es que existen. Enrutador llama al método apropiado
+	del controlador apropiado. Se pretende el desarrollo de un controlador por caso de uso y de un método
+	por cada paso dentro del caso de uso que lo requiera.
+
+	Especificación de casos de uso disponible en Google Drive (aun en desarrollo)
+	https://docs.google.com/document/d/1xNy6zjLGCc9dC3ChDw_FFZ-bb8u-L_3lsaNquzxiaW0/edit?usp=sharing
+
+3 - Base de datos
+
+	El script para levantar la versión actual de la BD es red_social.sql, ubicado directamente bajo la raíz del
+	proyecto.
+
+4 - Clases del proyecto
+
+	Los archivos "Red Social.mdl" y "Red Social.mdl~" pueden abrirse con IBM Rational Rose 7.0.0 para ver de
+	forma gráfica la relación entre las clases del proyecto (aunque los diagramas de clase siguen en desarrollo).
