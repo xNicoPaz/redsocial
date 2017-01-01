@@ -1,11 +1,11 @@
 <?php namespace Config;
-define('ROOT', "C:\\wamp64\\www\\redsocial\\");
-define('WEBROOT', "//localhost:63342/redsocial2/");
+define('ROOT', "/opt/lampp/htdocs/redsocial/");
+define('WEBROOT', "//localhost/redsocial/");
 
 class autoload{
 	public static function run(){
 		spl_autoload_register(function($class){
-			$script = ROOT . $class . ".php";
+			$script = ROOT . str_replace("\\", "/", $class) . ".php";
 
 			if(is_readable($script)){
 				require_once $script;
