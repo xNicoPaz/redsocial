@@ -1,6 +1,5 @@
 <?php namespace Controllers;
 
-
 use Models\Database\UsuarioMySQL;
 use Views\NonIntranet\Registro;
 
@@ -28,9 +27,9 @@ class RegistrationController extends BaseController
 
 		$capaDatos = new UsuarioMySQL();
 		$usuario = new \Models\Usuario($nombres, $apellidos, $pass, $repPass, $email, $capaDatos);
-		//Si por alguna razon no pudo crearse el usuario, la vista
-		if (!$usuario->valido) {
-			$registro = new Registro(
+		
+		//Llamada a la vista
+		$registro = new Registro(
 				$usuario->nombresValido,
 				$usuario->apellidosValido,
 				$usuario->contraseñaValido,
@@ -38,7 +37,6 @@ class RegistrationController extends BaseController
 				$usuario->emailValido,
 				$usuario->emailUnico
 			);
-			$registro->Mostrar();
-		}
+		$registro->Mostrar();
 	}
 }

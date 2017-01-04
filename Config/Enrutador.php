@@ -3,6 +3,7 @@
 
 use Controllers\BaseController;
 use Controllers\NonIntranetController;
+use Controllers\RegistrationController;
 
 class Enrutador
 {
@@ -15,7 +16,7 @@ class Enrutador
 				$nonInCont = new NonIntranetController($metodo);
 				break;
 			case "registro":
-
+				$regCont = new RegistrationController($metodo);
 				break;
 			default:
 				//Error 404, que haaaaacesss chango?

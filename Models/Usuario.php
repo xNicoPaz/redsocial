@@ -57,6 +57,7 @@ class Usuario
 	}
 	public function ContraseñaValida($contraseña, $repContraseña){
 		if($contraseña === $repContraseña){
+			$this->repContraseñaValido = true;
 			if(strlen($contraseña) >= 8 && strlen($contraseña) <= 50 && preg_match("/^[a-zA-Z0-9]*$/", $contraseña)){
 				$this->contraseñaValido = true;
 				return true;
@@ -70,6 +71,7 @@ class Usuario
 	}
 	public function EmailValido($email){
 		if(filter_var($email, FILTER_VALIDATE_EMAIL)){
+			$this->emailValido = true;
 			if($this->capaDatos->EmailUnico($email)){
 				$this->emailUnico = true;
 				return true;

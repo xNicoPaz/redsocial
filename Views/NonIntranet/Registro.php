@@ -12,8 +12,7 @@
 			$mensEmailUn = ($emailUn) ? "" : "El email ingresado ya se encuentra registrado, no puede usarse dos veces.";
 
 			$this->contenido = Views\Includes::Head();
-			$this->contenido .=
-				"<body>
+			$this->contenido .= "<body>
 					<form method='post' action='". WEBROOT . "index.php?controlador=registro&metodo=registrar' enctype='multipart/form-data'>
 						Nombres: <input name='nombres' id='nombres' type='text'> " . $mensNom . "<br>
 						Apellidos: <input name='apellidos' id='apellidos' type='text'> " . $mensApe . "<br>
