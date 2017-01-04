@@ -20,7 +20,7 @@ class Enrutador
 				break;
 			default:
 				//Error 404, que haaaaacesss chango?
-				echo \Views\NotFound::show();
+				echo \Views\WebPages\NotFound::show();
 				break;
 		}
 	}

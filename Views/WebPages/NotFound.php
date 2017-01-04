@@ -1,13 +1,5 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: Nicolás
- * Date: 13/12/2016
- * Time: 16:23
- */
-
-namespace Views;
-
+<?php 
+namespace Views\WebPages;
 
 class NotFound
 {

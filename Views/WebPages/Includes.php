@@ -1,5 +1,5 @@
 <?php 
-namespace Views;
+namespace Views\WebPages;
 
 	class Includes
 	{

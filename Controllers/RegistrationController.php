@@ -1,7 +1,7 @@
 <?php namespace Controllers;
 
 use Models\Database\UsuarioMySQL;
-use Views\NonIntranet\Registro;
+use Views\WebPages\Registro;
 
 class RegistrationController extends BaseController
 {

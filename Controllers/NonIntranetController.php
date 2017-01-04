@@ -1,11 +1,11 @@
-<?php namespace Controllers;
+<?php 
+namespace Controllers;
 
-use Views\NonIntranet\Registro;
+use Views\WebPages\Registro;
 
 class NonIntranetController extends BaseController
 {
 	//Implementacion de metodo __default de BaseController
-
 	public function __construct($metodo){
 		switch($metodo){
 			case "default":
@@ -16,8 +16,7 @@ class NonIntranetController extends BaseController
 
 	public function Index()
 	{
-		$registro = new Registro();
+		$registro = new Registro;
 		$registro->Mostrar();
 	}
-
 }

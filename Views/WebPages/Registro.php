@@ -1,7 +1,10 @@
-<?php namespace Views\NonIntranet;
-	use Views;
+<?php 
+namespace Views\WebPages;
 
-	class Registro extends \Views\BaseView
+use Views\WebPages\Includes;
+use Views\WebPages\BaseWebPage;
+
+	class Registro extends BaseWebPage
 	{
 		public function __construct($nomVal = true, $apeVal = true, $passVal = true, $repPass = true, $emailVal = true, $emailUn = true){
 			$mensNom = ($nomVal) ? "" : "Este campo puede ser de hasta 100 caracteres, no se aceptan numeros.";
@@ -11,7 +14,7 @@
 			$mensEmail = ($emailVal) ? "" : "El email ingresado no es valido.";
 			$mensEmailUn = ($emailUn) ? "" : "El email ingresado ya se encuentra registrado, no puede usarse dos veces.";
 
-			$this->contenido = Views\Includes::Head();
+			$this->contenido = Includes::Head();
 			$this->contenido .= "<body>
 					<form method='post' action='". WEBROOT . "index.php?controlador=registro&metodo=registrar' enctype='multipart/form-data'>
 						Nombres: <input name='nombres' id='nombres' type='text'> " . $mensNom . "<br>
