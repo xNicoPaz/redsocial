@@ -1,6 +1,11 @@
 <?php namespace Config;
+//Constante usada para requerir archivos
 define('ROOT', "/opt/lampp/htdocs/redsocial/");
+//Constante usada para construir URLs
 define('WEBROOT', "//localhost/redsocial/");
+
+//Llamar al autoloader de las librerias de terceros
+require ROOT . "vendor/autoload.php";
 
 class autoload{
 	public static function run(){

@@ -1,2 +1,14 @@
+#Ignorar archivos de cuestiones tecnicas de Sublime Text
 
 *.sublime-project
+
+#Ignorar todo lo que este en el directorio "vendor",
+#pues es usado por composer para instalar paquetes de
+#terceros. Si no se lo incluye el repositorio va a ser
+#muy pesado.
+
+vendor/
+
+#Ignorar archivos de cuestiones tecnicas de Netbeans
+nbproject/
+/nbproject/private/

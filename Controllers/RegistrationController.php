@@ -37,6 +37,20 @@ class RegistrationController extends BaseController
 				$usuario->emailValido,
 				$usuario->emailUnico
 			);
+
+		//To do: hacer que se envie el mail
+
+		//To do: hacer que se muestre la vista de registro si algo
+		//esta mal, pero que se muestre una vista de exito
+		//informando al usuario que se envio el email de 
+		//activacion si todo salio bien
+
+		/*
+		if(algo salio mal)
+			$registro->Mostrar();
+		else
+			$vistaExito->Mostrar();
+		*/
 		$registro->Mostrar();
 	}
 }
