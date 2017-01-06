@@ -16,7 +16,7 @@ class NonIntranetController extends BaseController
 
 	public function Index()
 	{
-		$registro = new Registro;
+		$registro = new Registro(false);
 		$registro->Mostrar();
 	}
 }

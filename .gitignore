@@ -10,5 +10,12 @@
 vendor/
 
 #Ignorar archivos de cuestiones tecnicas de Netbeans
+
 nbproject/
 /nbproject/private/
+
+
+#Ignorar el archivo experiments.php, usado como borrador para
+#probar cosas
+
+experiments.php

@@ -2,6 +2,7 @@
 
 use Models\Database\UsuarioMySQL;
 use Views\WebPages\Registro;
+use Views\Emails\ActivationEmail;
 
 class RegistrationController extends BaseController
 {
@@ -11,6 +12,9 @@ class RegistrationController extends BaseController
 				//Hay que registrar al usuario a traves del model Usuario
 				$this->Registrar();
 				break;
+                        case "activar":
+                            //To do: implementar activacion de cuenta
+                            break;
 		}
 	}
 
@@ -28,29 +32,26 @@ class RegistrationController extends BaseController
 		$capaDatos = new UsuarioMySQL();
 		$usuario = new \Models\Usuario($nombres, $apellidos, $pass, $repPass, $email, $capaDatos);
 		
+        if($usuario->valido){
+			//To do: enviar el email de activacion
+			$emailAct = new ActivationEmail($usuario->codigoActivacion);
+			$emailAct->AddDestinatario($usuario->email, $usuario->nombres . " " . $usuario->apellidos);
+			$emailAct->Enviar();
+        }
+                
+                
 		//Llamada a la vista
+		//Si el usuario fue registrado exitosamente, muestra un mensaje informando que se envio email de activacion
+		//Si no es asi, se muestra el formulario con los errores encontrados.
 		$registro = new Registro(
+				$usuario->valido,
 				$usuario->nombresValido,
 				$usuario->apellidosValido,
 				$usuario->contraseñaValido,
 				$usuario->repContraseñaValido,
 				$usuario->emailValido,
 				$usuario->emailUnico
-			);
-
-		//To do: hacer que se envie el mail
-
-		//To do: hacer que se muestre la vista de registro si algo
-		//esta mal, pero que se muestre una vista de exito
-		//informando al usuario que se envio el email de 
-		//activacion si todo salio bien
-
-		/*
-		if(algo salio mal)
-			$registro->Mostrar();
-		else
-			$vistaExito->Mostrar();
-		*/
+		);
 		$registro->Mostrar();
 	}
 }
