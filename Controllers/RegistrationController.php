@@ -1,8 +1,10 @@
 <?php namespace Controllers;
 
 use Models\Database\UsuarioMySQL;
+use Models\Usuario;
 use Views\WebPages\Registro;
 use Views\Emails\ActivationEmail;
+use Views\WebPages\ActivacionExitosa;
 
 class RegistrationController extends BaseController
 {
@@ -12,9 +14,10 @@ class RegistrationController extends BaseController
 				//Hay que registrar al usuario a traves del model Usuario
 				$this->Registrar();
 				break;
-                        case "activar":
-                            //To do: implementar activacion de cuenta
-                            break;
+			case "activar":
+                //To do: implementar activacion de cuenta
+                $this->Activar();
+                break;
 		}
 	}
 
@@ -30,7 +33,7 @@ class RegistrationController extends BaseController
 		//y leerse desde ahi
 
 		$capaDatos = new UsuarioMySQL();
-		$usuario = new \Models\Usuario($nombres, $apellidos, $pass, $repPass, $email, $capaDatos);
+		$usuario = new Usuario($nombres, $apellidos, $pass, $repPass, $email, $capaDatos);
 		
         if($usuario->valido){
 			//To do: enviar el email de activacion
@@ -53,5 +56,16 @@ class RegistrationController extends BaseController
 				$usuario->emailUnico
 		);
 		$registro->Mostrar();
+	}
+
+	private function Activar(){
+		$cuentaActivada = Usuario::Activar($_GET['codigo'], new UsuarioMySQL());
+		if($cuentaActivada){
+			//To do: redireccionar a una vista que le indique que la cuenta esta activada
+			ActivacionExitosa::show();
+		}else{
+			//To do: redireccionar a algun lugar que diga que hay un problema en el servidor
+
+		}
 	}
 }

@@ -67,4 +67,21 @@ class UsuarioMySQL implements IUsuarioDB
 
 	}
 
+	public function ActivarUsuario($codigoActivacion){
+		try{
+			$this->IniciarConexionMySQL();
+			$stmt = $this->con->prepare("UPDATE usuarios SET activada = true WHERE codigoActivacion = :codigoActivacion AND activada = false");
+			$stmt->bindParam(":codigoActivacion", $codigoActivacion);
+
+			$stmt->execute();
+			$exito = 1;
+		}
+		catch(\PDOException $ex){
+			$exito = FALSE;
+		}
+		finally{
+			$con = null;
+			return $exito;
+		}
+	}
 }

@@ -6,4 +6,5 @@ interface IUsuarioDB
 {
 	public function EmailUnico($email);
 	public function GuardarUsuario(Usuario $usuario);
+	public function ActivarUsuario($codigoActivacion);
 }

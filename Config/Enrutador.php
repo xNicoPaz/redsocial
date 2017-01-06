@@ -4,6 +4,7 @@
 use Controllers\BaseController;
 use Controllers\NonIntranetController;
 use Controllers\RegistrationController;
+use \Views\WebPages\NotFound;
 
 class Enrutador
 {
@@ -20,7 +21,7 @@ class Enrutador
 				break;
 			default:
 				//Error 404, que haaaaacesss chango?
-				echo \Views\WebPages\NotFound::show();
+				NotFound::show();
 				break;
 		}
 	}

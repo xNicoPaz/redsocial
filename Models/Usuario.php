@@ -43,7 +43,7 @@ class Usuario
 		}
 	}
 
-	//Metodos estaticos
+	//Metodos para validar
 	public function NombreOApellidoValido($nombres, $aValidar){
 		//Buscar que cosas podrian hacer invalido al nombre y negar el resultado
 		$ilegal = "#$%^&*()+=-[]';,./{}|:<>?~";
@@ -83,5 +83,11 @@ class Usuario
 			$this->emailValido = false;
 			return false;
 		}
+	}
+
+	//Metodos estaticos
+	public static function Activar($codigoActivacion, Database\IUsuarioDB $capaDatos){
+		$codigoActivacion = htmlspecialchars($codigoActivacion);
+		return $capaDatos->ActivarUsuario($codigoActivacion);
 	}
 }
