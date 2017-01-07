@@ -8,8 +8,12 @@ class ActivacionExitosa implements IStaticWebPage{
 	public static function show(){
 		echo 
 			Includes::Head()
-			 . "<h1>La cuenta esta activada</h1>"
-			 . "<p>Puede loguearse para empezar a entrometerse en lo ajeno.</p>";
+			 . Includes::Header()
+			 . "<div class='page-header'>
+			 <h1 class='alert alert-info'>La cuenta esta activada</h1>
+			 </div>"
+			 . "<p>Puede loguearse para empezar a entrometerse en lo ajeno.</p>"
+			 . Includes::Footer();
 	}
 }
 ?>
