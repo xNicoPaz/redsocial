@@ -10,7 +10,7 @@ class ActivacionExitosa implements IStaticWebPage{
 			Includes::Head()
 			 . Includes::Header()
 			 . "<div class='page-header'>
-			 <h1 class='alert alert-info'>La cuenta esta activada</h1>
+			 <h1>La cuenta esta activada</h1>
 			 </div>"
 			 . "<p>Puede loguearse para empezar a entrometerse en lo ajeno.</p>"
 			 . Includes::Footer();

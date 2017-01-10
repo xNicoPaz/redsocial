@@ -31,18 +31,15 @@ class RegistrationController extends BaseController
 		//Arbitrariamente aqui llamamos a MySQL,
 		//PERO, esta configuracion deberia estar en un archivo XML o algo asi
 		//y leerse desde ahi
-
 		$capaDatos = new UsuarioMySQL();
 		$usuario = new Usuario($nombres, $apellidos, $pass, $repPass, $email, $capaDatos);
-		
+		//Si el usuario es valido se envia el email de activacion
         if($usuario->valido){
 			//To do: enviar el email de activacion
 			$emailAct = new ActivationEmail($usuario->codigoActivacion);
 			$emailAct->AddDestinatario($usuario->email, $usuario->nombres . " " . $usuario->apellidos);
 			$emailAct->Enviar();
         }
-                
-                
 		//Llamada a la vista
 		//Si el usuario fue registrado exitosamente, muestra un mensaje informando que se envio email de activacion
 		//Si no es asi, se muestra el formulario con los errores encontrados.
@@ -53,7 +50,11 @@ class RegistrationController extends BaseController
 				$usuario->contraseñaValido,
 				$usuario->repContraseñaValido,
 				$usuario->emailValido,
-				$usuario->emailUnico
+				$usuario->emailUnico,
+				$usuario->GetNombres(),
+				$usuario->GetApellidos(),
+				$usuario->GetEmail(),
+				$usuario->GetContraseña()
 		);
 		$registro->Mostrar();
 	}
