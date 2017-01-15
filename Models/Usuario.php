@@ -24,11 +24,12 @@ class Usuario
 	private $capaDatos;
 
 	//Metodos magicos
-	public function __construct($nombres, $apellidos, $contraseña, $repContraseña, $email, IUsuarioDB $capaDatos){
+	public function __construct($nombres, $apellidos, $contraseña, $repContraseña, $email, IUsuarioDB $CapaDatos){
 		//TODO: Terminar la validacion del usuario
-		$this->capaDatos = $capaDatos;
+		$this->capaDatos = $CapaDatos;
 		//Determinar si el usuario es valido
-		$this->valido = true;
+		$this->valido = 1;
+		
 		$this->NombreOApellidoValido($nombres, 'nombresValido');
 		$this->NombreOApellidoValido($apellidos, 'apellidosValido');
 		$this->ContraseñaValida($contraseña, $repContraseña);
@@ -67,56 +68,57 @@ class Usuario
 		$exito = null;
 		$ilegal = "#$%^&*()+=-[]';,./{}|:<>?~";
 		if(strpbrk($nombres, $ilegal) === false && strlen($nombres) <= 100 && $nombres !== " " && $nombres !== "    "){
-			$this->$aValidar = true;
-			$exito = true;
+			$this->$aValidar = 1;
+			$exito = 1;
 		}else{
-			$this->$aValidar = false;
-			$exito = false;
+			$this->$aValidar = 0;
+			$exito = 0;
 		}
 
 		$this->valido = $this->valido && $exito;
 	}
 
 	public function ContraseñaValida($contraseña, $repContraseña){
-		$exito= true;
+		$exito= 1;
 
 		if(strlen($contraseña) >= 8 && strlen($contraseña) <= 50 && preg_match("/^[a-zA-Z0-9]*$/", $contraseña)){
-			$this->contraseñaValido = true;
-			$exito = $exito && true;
+			$this->contraseñaValido = 1;
+			$exito = $exito && 1;
 		}else{
-			$this->contraseñaValido = false;
-			$exito = $exito && false;
+			$this->contraseñaValido = 0;
+			$exito = $exito && 0;
 		}	
 
 		if($contraseña === $repContraseña){
-			$this->repContraseñaValido = true;
-			$exito = $exito && true;
+			$this->repContraseñaValido = 1;
+			$exito = $exito && 1;
 		}else{
-			$this->repContraseñaValido = false;
-			$exito = $exito && false;
+			$this->repContraseñaValido = 0;
+			$exito = $exito && 0;
 		}
 
 		$this->valido = $this->valido && $exito;
-
+		
 	}
                         
 	public function EmailValido($email){
 		$exito = null;
-		if(filter_var($email, FILTER_VALIDATE_EMAIL)){
-			$this->emailValido = true;
+		if(!filter_var($email, FILTER_VALIDATE_EMAIL) === false){
+			$this->emailValido = 1;
 			if($this->capaDatos->EmailUnico($email)){
-				$this->emailUnico = true;
-				$exito = true;
+				$this->emailUnico = 1;
+				$exito = 1;
 			}else{
-				$this->emailUnico = false;
-				$exito = false;
+				$this->emailUnico = 0;
+				$exito = 0;
 			}
 		}else{
-			$this->emailValido = false;
-			$exito = false;
+			$this->emailValido = 0;
+			$exito = 0;
 		}
 
 		$this->valido = $this->valido && $exito;
+		
 	}
                 
 	//Metodos estaticos

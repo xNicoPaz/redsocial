@@ -17,10 +17,11 @@ use Views\WebPages\BaseWebPage;
 									. " Para completar el proceso de registro ingrese a su cuenta de correo haga click en"
 									. " el email de activacion</p>";
 			}else{
-				//Si el usuario no es valido, volver a mostrarle el formulario de registro con los correspondientes errores
-				$mensNom = ($nomVal) ? "" : "<span class='alert alert-danger col-sm-6'>Este campo puede ser de hasta 100 caracteres, no se aceptan numeros. </span>";
-				$mensApe = ($apeVal) ? "" : "<span class='alert alert-danger col-sm-6'>Este campo puede ser de hasta 100 caracteres, no se aceptan numeros.  </span>";
-				
+				//Mensaje de error de Nombres
+				$mensNom = ($nomVal) ? "" : "<span class='alert alert-danger col-sm-6'>Este campo puede ser de hasta 100 caracteres, no se aceptan numeros ni caracteres especiales. </span>";
+				//Mensaje de error de Apellidos
+				$mensApe = ($apeVal) ? "" : "<span class='alert alert-danger col-sm-6'>Este campo puede ser de hasta 100 caracteres, no se aceptan numeros ni acaracteres especiales.  </span>";
+				//Mensajes de error de Contraseña y Repeticion de Contraseña
 				if(!$passVal){
 					$mensPass = "<span class='alert alert-danger col-sm-6'>La contraseña debe tener entre 8 y 50 caracteres, se aceptan numeros y letras tanto en mayuscula como en minuscula.  </span>";
 					$mensRepPass = "";
@@ -31,17 +32,17 @@ use Views\WebPages\BaseWebPage;
 					}else
 						$mensRepPass = "";					
 				}
+				//Mensaje de error de Email
+				if(!$emailVal)
+					$mensEmail = "El email ingresado no es valido.";
+				elseif(!$emailUn)
+					$mensEmail = "El email ingresado ya se encuentra registrado.";
+				$mensEmail = (!$emailVal || !$emailUn) ? "<span class='alert alert-danger col-sm-6'>" . $mensEmail . "</span>" : "";
 
-				/*$mensPass = ($passVal) ? "" : "<span class='alert alert-danger col-sm-6'>La contraseña debe tener entre 8 y 50 caracteres, se aceptan numeros y letras tanto en mayuscula como en minuscula.  </span>";
-				$mensRepPass = ($repPass) ? "" : "<span class='alert alert-danger col-sm-6'>Las contraseñas especificadas no coinciden.  </span>";*/
-				
-
-				$mensEmail = ($emailVal) ? "" : "El email ingresado no es valido. ";
-				$mensEmail .= ($emailUn) ? "" : "El email ingresado ya se encuentra registrado, no puede usarse dos veces.";
-				$mensEmail = ($emailVal || $emailUn) ? "" : "<span class='alert alert-danger col-sm-6'>" . $mensEmail . "</span>";
 				$mostrarEmail = $emailVal && $emailUn;
 				$mostrarContraseña = $passVal && $repPass; 
 
+				//Elaboracion el cuerpo de la vista
 				$this->contenido .= "
 					<div class='page-header'>	
 						<h1>Registrese <small>(No se haga el dificil)</small></h1>
@@ -51,6 +52,7 @@ use Views\WebPages\BaseWebPage;
 								<label for='nombres' class='control-label col-sm-2'>Nombres:</label>
 								<div class='col-sm-4'>
 									<input name='nombres' id='nombres' type='text' class='form-control' placeholder='Ingrese sus nombres' value='";
+				//Colocaccion del mensaje de error de Nombres
 				$this->contenido .= ($nomVal) ? $nombres : "";
 				$this->contenido .= "'>
 								</div>
@@ -60,6 +62,7 @@ use Views\WebPages\BaseWebPage;
 								<label for='apellidos' class='control-label col-sm-2'>Apellidos:</label>
 								<div class='col-sm-4'>
 									<input name='apellidos' id='apellidos' type='text' class='form-control' placeholder='Ingrese sus apellidos' value='";
+				//Colocaccion del mensaje de error de Apellidos
 				$this->contenido .= ($apeVal) ? $apellidos : "";
 				$this->contenido .= "'>
 								</div>
@@ -69,6 +72,7 @@ use Views\WebPages\BaseWebPage;
 								<label for='email' class='control-label col-sm-2'>Email:</label>
 								<div class='col-sm-4'>
 									<input name='email' id='email' type='email' class='form-control' placeholder='Ingrese su correo electronico' value='";
+				//Colocaccion del mensaje de error de Email
 				$this->contenido .= ($mostrarEmail) ? $email : "";
 				$this->contenido .= "'>
 								</div>
@@ -78,6 +82,7 @@ use Views\WebPages\BaseWebPage;
 								<label for='pass' class='control-label col-sm-2'>Contraseña:</label>
 								<div class='col-sm-4'>		
 									<input name='pass' id='pass' type='password' class='form-control' placeholder='Ingrese su contraseña' value='";
+				//Colocaccion del mensaje de error de Contraseña
 				$this->contenido .= ($mostrarContraseña) ? $pass : "";
 				$this->contenido .= "'>
 								</div> 
@@ -87,6 +92,7 @@ use Views\WebPages\BaseWebPage;
 								<label for='repPass' class='control-label col-sm-2'>Repita su contraseña:</label>
 								<div class='col-sm-4'>
 									<input name='repPass' id='repPass' type='password' class='form-control' placeholder='Por favor repita su contraseña' value='";
+				//Colocaccion del mensaje de error de Repeticion de Contraseña
 				$this->contenido .= ($mostrarContraseña) ? $pass : "";
 				$this->contenido .= "'> 
 								</div>
